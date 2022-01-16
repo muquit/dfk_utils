@@ -6,7 +6,7 @@ Some utilities in [golang](https://go.dev) for interacting with smart contracts 
 
 # Compiling
 
-Before compiling, install go from https://golang.org/. The binaries can be compiled for following Platforms:
+Before compiling, install go from https://go.dev/. The binaries can be compiled for following Platforms:
 
 - MacOS
 - Linux
