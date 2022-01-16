@@ -1,0 +1,9 @@
+Some notes for me
+
+# go mod init github.com/muqit/dfk_utils
+# create common packages in pkg directory
+# create individual programs in src/<name>
+
+
+--
+muquit@muquit.com Jan-14-2022 
