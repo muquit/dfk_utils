@@ -71,9 +71,15 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	abuf, _ := hero.AlphabetaizeGenes(h.Info.StatGenes)
+	fmt.Println(abuf)
+	sg, _ := hero.DecodeStatGenes(h.Info.StatGenes)
+	fmt.Println(sg)
+//	os.Exit(0)
 
 	// convert the object JSON and print
 	hinfo := HeroInfo{OwnerAddress: ownerAddress, HeroInfo: h}
+	// decode genes
 	byteArray, err := json.MarshalIndent(hinfo, "", "  ")
 	fmt.Println(string(byteArray))
 
