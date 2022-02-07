@@ -3,13 +3,16 @@
 # genmake 1.0 by muquit@muquit.com, http://www.muquit.com/
 
 TAVERN_PKG=pkg/tavern
-HERO_PKG=pkh/hero
+HERO_PKG=pkg/hero
+LAND_PKG=pkg/land
+PROFILE_PKG=pkg/profile
 
 NATIVE_DIR=./bin
 LINUX_DIR=./bin/linux
 WINDOWS_DIR=./bin/windows
 PI_DIR=./bin/pi
 PI_JESSIE_DIR=./bin/pi_jessie
+MAC_DIR=./bin/mac
 
 all: native mac linux windows pi pi_jessie
 
@@ -43,11 +46,16 @@ pi_jessie:
 	GOARM=6 GOARCH=arm GOOS=linux go build -o ./bin/pi_jessie ./...
 	@echo ""
 
+
 abi:
 	@mkdir -p $(TAVERN_PKG)
 	@mkdir -p $(HERO_PKG)
-	abigen --abi abis/tavern.abi --pkg hero --type Hero --out $(HERO_PKG)/hero.go
-	abigen --abi abis/tavern.abi --pkg tavern --type Tavern --out $(TAVERN_PKG)/tavern.go
+	@mkdir -p $(LAND_PKG)
+	@mkdir -p $(PROFILE_PKG)
+	abigen --abi abis/hero.json --pkg hero --type Hero --out $(HERO_PKG)/hero.go
+	abigen --abi abis/tavern.json --pkg tavern --type Tavern --out $(TAVERN_PKG)/tavern.go
+	abigen --abi abis/land.json --pkg land --type Land --out $(LAND_PKG)/land.go
+	abigen --abi abis/profile.json --pkg profile --type Profile --out $(PROFILE_PKG)/profile.go
 
 tidy:
 	go mod tidy
@@ -56,8 +64,9 @@ clean_native:
 	@/bin/rm -f ./bin/* 
 
 clean:
-	@/bin/rm -f $(LINUX_DIR)/* >/dev/null 2>&1
-	@/bin/rm -f $(WINDOWS_DIR)/* >/dev/null 2>&1
-	@/bin/rm -f $(PI_DIR)/* >/dev/null 2>&1
-	@/bin/rm -f $(PI_JESSIE_DIR)/* >/dev/null 2>&1
-	@/bin/rm -f $(NATIVE_DIR)/* >/dev/null 2>&1
+	/bin/rm -f $(LINUX_DIR)/* >/dev/null 2>&1
+	/bin/rm -f $(WINDOWS_DIR)/* >/dev/null 2>&1
+	/bin/rm -f $(PI_DIR)/* >/dev/null 2>&1
+	/bin/rm -f $(PI_JESSIE_DIR)/* >/dev/null 2>&1
+	/bin/rm -f $(MAC_DIR)/* >/dev/null 2>&1
+	/bin/rm -f $(NATIVE_DIR)/* >/dev/null 2>&1

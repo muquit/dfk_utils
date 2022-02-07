@@ -35,7 +35,11 @@ All required modules will be downloaded automatically.
 
 Currently the following utilities are developed
 
-- _hero_info_ - Display Hero information in JSON to stdout. Compiled binaries are available for MacOS, Linux, Windows, Raspberry PI in ./bin directory
+Compiled binaries are available for MacOS, Linux, Windows, Raspberry PI in ./bin directory
+
+- _hero_info_ - Print Hero information from blockchain in JSON to stdout.
+- _profile_info_ - Print profile information from blockchain to stdout in JSON format.
+- _land_info_ - Print land information from blockchain to stdout in JSON format.
 
 ## Usage
 
@@ -45,9 +49,23 @@ Usage of bin/hero_info:
     	Hero Id (default 1)
 ```
 
+```
+Usage of bin/profile_info:
+  -addr string
+    	Profile Hex Address
+```
+
+```
+Usage of bin/land_info:
+  -lid int
+    	Land Id. If not specified all lands will be displayed
+```
+
 **TODO**: Stats and Visual Genes decoding
 
 **Example**
+
+**Print Hero information**
 
 ```
 $ ./bin/hero_info -hid 1
@@ -138,5 +156,78 @@ $ ./bin/hero_info -hid 1
     }
   }
 }
+```
 
+**Print Profile inforamtion**
+
+```
+$ ./bin/profile_info -addr 0x2E7669F61eA77F02445A015FBdcFe2DE47083E02
+{
+   "id": 38,
+   "owner_address": "0x2e7669f61ea77f02445a015fbdcfe2de47083e02",
+   "name": "FriskyFox",
+   "created_on_epoch": 1629680114,
+   "created_on_time_local": "2021-08-22 20:55:14 -0400 EDT",
+   "pic_id": 6,
+   "hero_id": 0
+}
+```
+
+**Print Land inforamtion**
+
+```
+$ ./bin/land_info
+```
+
+```
+[
+  {
+    "LandId": 1,
+    "Name": "Wevelmont",
+    "Owner": "0x8fb7ae993198a0369efe959ec99b6674cf672731",
+    "Region": 0,
+    "Level": 1,
+    "Steward": 0,
+    "Score": 0
+  },
+  {
+    "LandId": 2,
+    "Name": "Vohenland",
+    "Owner": "0x77d991987ca85214f9686131c58c1abe4c93e547",
+    "Region": 0,
+    "Level": 1,
+    "Steward": 0,
+    "Score": 0
+  },
+  {
+    "LandId": 3,
+    "Name": "Gothune",
+    "Owner": "0x6880add29b5e84c543ff745856a0f3368e58f165",
+    "Region": 0,
+    "Level": 1,
+    "Steward": 0,
+    "Score": 0
+  },
+  ....
+```
+
+Show just the Owers' names:
+
+```
+$ ./bin/land_info | jq '.[].Name'
+```
+
+To print info about a specific land:
+
+```
+$ ./bin/land_info -lid 10
+{
+   "LandId": 10,
+   "Name": "Ashem",
+   "Owner": "0x8ca47f7bd4c284bfbea3ca0f052eaf98f2990261",
+   "Region": 0,
+   "Level": 1,
+   "Steward": 0,
+   "Score": 0
+}
 ```
