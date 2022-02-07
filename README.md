@@ -211,7 +211,7 @@ $ ./bin/land_info
   ....
 ```
 
-Show just the Owers' names:
+Show just the Owners' names:
 
 ```
 $ ./bin/land_info | jq '.[].Name'
